@@ -1,0 +1,28 @@
+html {
+    font-family: cursive;
+}
+
+#upload {
+    border: 5px;
+    border-radius: 12%;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.button {
+    justify-content: center;
+}
+
+body {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: rgb(255, 94, 0)68, 247, 247);
+}
+
+.dropzone {
+    padding: 0px
+}
