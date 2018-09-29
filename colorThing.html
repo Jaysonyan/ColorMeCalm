@@ -11,7 +11,7 @@
   <body>
     <script>
       var imageObj = new Image();
-      imageObj.src = 'square_one.jpg';
+      imageObj.src = 'coke.jpg';
       imageObj.crossOrigin = "Anonymous";
     </script>
     <canvas id="myCanvas" width="578" height="400"></canvas>
@@ -24,7 +24,7 @@
         canvas.width = sideLength;
 
         //// NUMBER OF GRID SQUARES
-        var numSquares = 10;
+        var numSquares = 50;
 
         context.drawImage(imageObj, 0, 0, sideLength, sideLength);
 
@@ -45,18 +45,19 @@
             for (var y = 0; y < gridSideLength; y++) {
               // pixel col
               for (var x = 0; x < gridSideLength; x++) {
-                rgb.r += data[(i * gridSideLength) + (j * gridSideLength * sideLength) + (y * sideLength) + x];
-                rgb.g += data[(i * gridSideLength) + (j * gridSideLength * sideLength) + (y * sideLength) + x + 1];
-                rgb.b += data[(i * gridSideLength) + (j * gridSideLength * sideLength) + (y * sideLength) + x + 2];
+                rgb.r += data[4 * ((j * gridSideLength) + (i * gridSideLength * sideLength) + (y * sideLength) + x)];
+                rgb.g += data[4 * ((j * gridSideLength) + (i * gridSideLength * sideLength) + (y * sideLength) + x) + 1];
+                rgb.b += data[4 * ((j * gridSideLength) + (i * gridSideLength * sideLength) + (y * sideLength) + x) + 2];
                 count++;
               }
             }
 
-            rgb.r = Math.floor(rgb.r / count);
-            rgb.g = Math.floor(rgb.g / count);
-            rgb.b = Math.floor(rgb.b / count);
+            rgb.r = (rgb.r / count);
+            rgb.g = (rgb.g / count);
+            rgb.b = (rgb.b / count);
             gridColors.push(rgb.r, rgb.g, rgb.b);
-            context.fillStyle = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ', 0)';
+            context.fillStyle = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')';
+            //context.fillStyle = "rgb(120, 120, 120)";
             context.fillRect(j * gridSideLength, i * gridSideLength, gridSideLength, gridSideLength);
           }
 
