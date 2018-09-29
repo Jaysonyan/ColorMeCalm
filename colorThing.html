@@ -11,7 +11,7 @@
   <body>
     <script>
       var imageObj = new Image();
-      imageObj.src = 'coke.jpg';
+      imageObj.src = 'theexplorer.jpg'
       imageObj.crossOrigin = "Anonymous";
     </script>
     <canvas id="myCanvas" width="578" height="400"></canvas>
@@ -24,7 +24,7 @@
         canvas.width = sideLength;
 
         //// NUMBER OF GRID SQUARES
-        var numSquares = 50;
+        var numSquares = 5;
 
         context.drawImage(imageObj, 0, 0, sideLength, sideLength);
 
@@ -33,7 +33,7 @@
 
         // "blurring" image through averaging colors
 
-        var gridSideLength = sideLength / numSquares;
+        var gridSideLength = Math.ceil(sideLength / numSquares);
         var gridColors = [];
         var l = data[i*30];
         for (var i = 0; i < numSquares; i++) {
