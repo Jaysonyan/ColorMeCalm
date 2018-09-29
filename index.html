@@ -3,8 +3,13 @@
   <head>
     <meta charset="UTF-8">
     <title>title</title>
+    <script src="./path/to/dropzone.js"></script>
   </head>
   <body>
-  
+      <form action="/file-upload" class="dropzone">
+          <div class="fallback">
+              <input name="file" type="file" multiple />
+          </div>
+      </form>
   </body>
 </html>
