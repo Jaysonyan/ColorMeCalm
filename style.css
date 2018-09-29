@@ -33,14 +33,19 @@ padding-left: 145px;
     opacity: 0.7;
 }
 
-.btn-lg:hover {
+.btn-lg:hover,.btn-lg:active{
+    font-weight: bold;
+    padding:30px 77px;
+}
+
+.btn-lg:active{
     position:relative;
     top:5px;
+    left:2px;
     background-color:#70d2f0;
     box-shadow: 1px 5px #349ab9;
     opacity:100%;
 }
-
 .row {
     padding: 0px;
     
@@ -57,7 +62,7 @@ body {
     background-image: url("https://i.gifer.com/2vCZ.gif");
     background-repeat: no-repeat;
     background-position: top left;
-    opacity: 0.95;
+    opacity: 0.97;
     background-size: 100%;
 }
 

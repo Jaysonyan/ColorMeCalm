@@ -19,10 +19,10 @@
         </div>
         <div class = "row">
             <div class="col-sm-12">
-                <form action="upload.php" class="dropzone">
-                    <div class="fallback">
-                        <input name="file" type="file"/>
-                    </div>
+                <form action="upload.php" method="post" enctype="multipart/form-data">
+                    Select image to upload:
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    <input type="submit" value="Upload Image" name="submit">
                 </form>
             </div>
         </div>
