@@ -11,7 +11,7 @@
   <body>
     <script>
       var imageObj = new Image();
-      imageObj.src = 'theexplorer.jpg'
+      imageObj.src = 'uploads/image.png';
       imageObj.crossOrigin = "Anonymous";
     </script>
     <canvas id="myCanvas" width="578" height="400"></canvas>
@@ -24,7 +24,7 @@
         canvas.width = sideLength;
 
         //// NUMBER OF GRID SQUARES
-        var numSquares = 5;
+        var numSquares = 25;
 
         context.drawImage(imageObj, 0, 0, sideLength, sideLength);
 
@@ -41,7 +41,7 @@
           for (var j = 0; j < numSquares; j++) {
             var rgb = {r:0,g:0,b:0};
             var count = 0;
-            
+
             for (var y = 0; y < gridSideLength; y++) {
               // pixel col
               for (var x = 0; x < gridSideLength; x++) {
@@ -63,11 +63,11 @@
 
         }
       }
-      
+
       imageObj.onload = function() {
         drawImage(this);
       };
-      
+
     </script>
   </body>
-</html>      
+</html>

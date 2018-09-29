@@ -22,7 +22,7 @@ app.post('/upload', function(req, res) {
         res.send("error occured");
       }
       else {
-        res.send("Done!");
+        res.sendFile(__dirname + '/colorThing.html');
       }
     });
   }
@@ -30,6 +30,10 @@ app.post('/upload', function(req, res) {
 
 app.get('/image', (req, res) => {
   res.sendFile(__dirname + '/uploads/image.png');
+});
+
+app.get("/pixel", (req, res) => {
+  res.sendFile(__dirname + '/colorThing.html');
 });
 
 app.listen(8000, () => {
