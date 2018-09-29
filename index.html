@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css"> 
   </head>
   <body>
-      <form action="/file-upload" class="dropzone">
-          <div class="fallback">
-              <input name="file" type="file"/>
-          </div>
-      </form>
-  </body>
+      <div class = "row">
+        <div class="col-sm-12">
+            <form action="/file-upload" class="dropzone">
+                <div class="fallback">
+                    <input name="file" type="file" multiple />
+                </div>
+            </form>
+        </div>
+    </body>
 </html>
