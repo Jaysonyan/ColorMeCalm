@@ -30,7 +30,7 @@
         var green = data[((imageWidth * y) + x) * 4 + 1];
         var blue = data[((imageWidth * y) + x) * 4 + 2];
         var alpha = data[((imageWidth * y) + x) * 4 + 3];
-        
+
         // iterate over all pixels based on x and y coordinates
         for(var y = 0; y < imageHeight; y++) {
           // loop through each column
@@ -50,4 +50,4 @@
 
     </script>
   </body>
-</html>      
+</html>
