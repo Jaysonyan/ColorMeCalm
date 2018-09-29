@@ -10,10 +10,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname+'/index.html'));
 });
 
-app.listen(8000, () => {
-  console.log('Example app listening on port 8000!');
-});
-
 app.post('/upload', function(req, res) {
   if (req.files) {
     console.log(req.files)
@@ -29,6 +25,13 @@ app.post('/upload', function(req, res) {
         res.send("Done!");
       }
     });
-
   }
+});
+
+app.get('/image', (req, res) => {
+  res.sendFile(__dirname + '/uploads/image.png');
+});
+
+app.listen(8000, () => {
+  console.log('Example app listening on port 8000!');
 });
