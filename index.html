@@ -1,1 +1,36 @@
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="dropzone.js"></script>
+    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+    <body>
+        <div class="row">
+            <div class="col-sm-12 center-block text-center">
+                <h1 id="title"><b>Color Me Calm</b></h1>
+            </div>
+        </div>
+        <div class = "row">
+            <div class="col-sm-12">
+                <form action="upload.php" class="dropzone">
+                    <div class="fallback">
+                        <input name="file" type="file"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br><br><br>
+        <div class="row">
+                <div class="col-sm-4 center-block text-center"><button type="button" class="btn btn-lg">Easy</button></div>
+                <div class="col-sm-4 center-block text-center"><button type="button" class="btn btn-lg">Medium</button></div>
+                <div class="col-sm-4 center-block text-center"><button type="button" class="btn btn-lg">Hard</button></div>
+        </div>
+    </body>
+</html>

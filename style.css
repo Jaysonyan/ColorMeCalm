@@ -1,0 +1,66 @@
+html {
+padding-right: 145px;
+padding-left: 145px;
+}
+
+@page {
+    margin-left: 5cm;
+    margin-right: 5cm;
+ }
+
+#upload {
+    border: 5px;
+    border-radius: 12%;
+}
+#title{
+    color:rgb(236, 236, 236);
+    font-size: 100pt;
+    font-family: "Edwardian Script ITC";
+}
+
+.btn-lg{
+
+    padding:30px 80px;
+    font-size:70px;
+    border-radius: 50px;
+    background-color:#93dff7;
+    color: rgb(0, 0, 0);
+    font-family: "Poor Richard";
+    box-shadow: 5px 10px #349ab9;
+
+}
+.dropzone{
+    opacity: 0.7;
+}
+
+.btn-lg:hover {
+    position:relative;
+    top:5px;
+    background-color:#70d2f0;
+    box-shadow: 1px 5px #349ab9;
+    opacity:100%;
+}
+
+.row {
+    padding: 0px;
+    
+}
+
+.button {
+    justify-content: center;
+}
+
+body {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-image: url("https://i.gifer.com/2vCZ.gif");
+    background-repeat: no-repeat;
+    background-position: top left;
+    opacity: 0.95;
+    background-size: 100%;
+}
+
+.dropzone {
+    padding: 0px
+}
