@@ -12,6 +12,7 @@
     <script>
       var imageObj = new Image();
       imageObj.src = 'square_one.jpg';
+      imageObj.crossOrigin = "Anonymous";
     </script>
     <canvas id="myCanvas" width="578" height="400"></canvas>
     <script>
@@ -33,32 +34,39 @@
         // "blurring" image through averaging colors
 
         var gridSideLength = sideLength / numSquares;
-
+        var gridColors = [];
+        var l = data[i*30];
         for (var i = 0; i < numSquares; i++) {
           // col of grid
           for (var j = 0; j < numSquares; j++) {
             var rgb = {r:0,g:0,b:0};
-            var count = 1;
-            rgb.r = data[i * gridSideLength + j * gridSideLength];
-            rgb.g = data[i * gridSideLength + j * gridSideLength + 1];
-            rgb.b = data[i * gridSideLength + j * gridSideLength + 2];
+            var count = 0;
+            
             for (var y = 0; y < gridSideLength; y++) {
               // pixel col
               for (var x = 0; x < gridSideLength; x++) {
-                rgb.r += data[(y * sideLength) + x];
+                rgb.r += data[(i * gridSideLength) + (j * gridSideLength * sideLength) + (y * sideLength) + x];
+                rgb.g += data[(i * gridSideLength) + (j * gridSideLength * sideLength) + (y * sideLength) + x + 1];
+                rgb.b += data[(i * gridSideLength) + (j * gridSideLength * sideLength) + (y * sideLength) + x + 2];
+                count++;
               }
             }
 
-        }
+            rgb.r = Math.floor(rgb.r / count);
+            rgb.g = Math.floor(rgb.g / count);
+            rgb.b = Math.floor(rgb.b / count);
+            gridColors.push(rgb.r, rgb.g, rgb.b);
+            context.fillStyle = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ', 0)';
+            context.fillRect(j * gridSideLength, i * gridSideLength, gridSideLength, gridSideLength);
+          }
 
-        // overwrite original image
-        context.putImageData(imageData, 0, 0);
+        }
       }
-      
       
       imageObj.onload = function() {
         drawImage(this);
       };
+      
     </script>
   </body>
 </html>      
