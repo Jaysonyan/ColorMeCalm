@@ -1,4 +1,5 @@
 var currentSelection = 0;
+
 let palette1=[["#d35400","#c0392b","#9b59b6","#2980b9","#1abc9c","#27ae60"],["#e67e22","#e74c3c","#8e44ad","#3498db","#16a085","#2ecc71"]];
 let palette2=[["#f08080","#f1c40f", "#ecf0f1","#95a5a6","#34495e","#1b2631"],["#e9967a", "#f39c12", "#bdc3c7","#7f8c8d","#2c3e50","#17202a"]];
 var grid = [];
@@ -197,7 +198,17 @@ function drawPalette(arr, posn) {
             context.beginPath();
 
             context.rect(posn1[0] + (squareLen * c), posn1[1] + (squareLen * r), squareLen, squareLen);
+            if (currentSelection == parseInt(element)) {
+                context.lineWidth=3;
+            }
+            
             context.stroke();
+            context.lineWidth=1;
+            context.font = fontSize + " serif";
+            context.textAlign = "left"
+            context.textBaseline = "hanging";
+            context.fillStyle = "black"
+            context.fillText(element, posn1[0] + (squareLen * c), posn1[1] + (squareLen * r), squareLen, squareLen);
             context.closePath();
         }
     }
