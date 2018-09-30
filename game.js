@@ -18,7 +18,7 @@ var currentStatus = 1;
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = window.innerWidth;
+        this.canvas.width = screen.width;
         this.canvas.height = window.innerHeight;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
@@ -123,15 +123,17 @@ var origY = grid[0][0].y;
 
 
 function mouseClick(e) {
-    alert("wtf");
-    let squareLen = myGameArea.canvas.height / (grid.length / 2);
+    let squareLen = myGameArea.canvas.height / grid.length;
     let x = e.screenX;
     let y = e.screenY;
-    let r = Math.floor((x - origX) / squareLen);
-    let c = Math.floor((y - origY) / squareLen);
+    let r = Math.floor((x - ((myGameArea.canvas.width / 2) - myGameArea.canvas.height / 2)) / squareLen);
+    let c = Math.floor(y / squareLen);
+    console.log(r, c, x, y,((myGameArea.canvas.width / 2) - myGameArea.canvas.height / 2), squareLen, myGameArea.canvas.width);
     if (0 == grid[c][r].status && grid[c][r].n == currentStatus) {
         grid[c][r].status = 1;
     }
+    grid[c][r].status = 1;
+    alert(r,c);
 }
 
 
