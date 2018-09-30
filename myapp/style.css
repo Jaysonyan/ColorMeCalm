@@ -63,12 +63,12 @@ padding-left: 145px;
 }
 .row {
     padding: 0px;
-    
+
 }
 
 .button {
     justify-content: center;
-}   
+}
 
 body {
     -webkit-box-sizing: border-box;
@@ -126,8 +126,3 @@ form input[type=submit]:hover{
     font-weight: bold;
     background-color: #fdc673;
 }
-
-
-  
-  
-  

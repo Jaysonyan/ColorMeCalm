@@ -16,8 +16,7 @@ imageObj.onload = function() {
 }
 
 function buildGrid(numSquares) {
-
-
+  console.log(numSquares);
   var canvas = document.getElementById('myCanvas');
   var context = canvas.getContext('2d');
   var sideLength = Math.max(imageObj.height, imageObj.width);
@@ -84,20 +83,6 @@ function buildGrid(numSquares) {
       }
   }
 }
-// var testGrid = [[1,1,1,1,1,1,1,1,1,1],
-//             [1,2,1,1,1,1,1,1,1,1],
-//             [1,1,3,1,1,1,1,1,1,1],
-//             [1,1,1,4,1,1,1,1,1,1],
-//             [1,1,1,1,1,1,1,1,1,1],
-//             [1,1,1,1,1,1,1,1,1,1],
-//             [1,1,1,6,1,1,1,1,1,1],
-//             [1,1,19,1,1,1,1,1,1,1],
-//             [1,1,1,1,1,1,1,1,1,1],
-//             [1,1,1,1,1,1,1,1,1,1],];
-//
-var testGrid = [[{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15}],
-[{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15}],
-[{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15}]];
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
@@ -121,32 +106,22 @@ function createCanvas() {
   document.body.insertBefore(canvas, document.body.childNodes[0]);
   canvas.setAttribute('id', "myCanvas");
   canvas.addEventListener("click", mouseClick);
-  buildGrid(20);
-  canvas.width = screen.width;
-  canvas.height = window.innerHeight;
+  // fetch("difficulty.json")
+  // .then(response => response.json())
+  // .then(json => console.log(json.dimension))
+  // .then(json => buildGrid(json.dimension))
+  // .then(canvas.width = screen.width)
+  // .then(canvas.height = window.innerHeight);
+  $.ajaxSetup({
+      async: false
+  });
+  $.getJSON("difficulty.json", function(json) {
+    buildGrid(json.dimension);
+    canvas.width = screen.width;
+    canvas.height = window.innerHeight
+  })
 }
 
-// for (let c = 0; c < testGrid.length; c++) {
-//     for (let r = 0; r < testGrid.length; r++) {
-//         var allPalletes = [].concat.apply([], palette1.concat(palette2));
-//         let min = {
-//           index: -1,
-//           distance: 1
-//         };
-//         for (let i = 0; i < allPalletes.length; i++) {
-//           let rgbPalleteColour = hexToRgb(allPalletes[i]);
-//           let imageColour = testGrid[c][r];
-//           let colourDistance = Math.sqrt((rgbPalleteColour.r-imageColour.r)^2+(rgbPalleteColour.r-imageColour.r)^2+(rgbPalleteColour.r-imageColour.r)^2)/Math.sqrt((255)^2+(255)^2+(255)^2);
-//           if (colourDistance < min.distance) {
-//             min = {
-//               index: i,
-//               distance: colourDistance
-//             };
-//           }
-//         }
-//         grid[c][r] = { x:0, y:0, n: min.index + 1, status: 0 };
-//     }
-// }
 
 function startGame() {
     // myGameArea.start();
