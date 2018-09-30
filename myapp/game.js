@@ -1,6 +1,7 @@
 var currentStatus = 0;
 let palette1=[["#d35400","#c0392b","#9b59b6","#2980b9","#1abc9c","#27ae60"],["#e67e22","#e74c3c","#8e44ad","#3498db","#16a085","#2ecc71"]];
 let palette2=[["#f08080","#f1c40f", "#ecf0f1","#95a5a6","#34495e","#1b2631"],["#e9967a", "#f39c12", "#bdc3c7","#7f8c8d","#2c3e50","#17202a"]];
+var grid = [];
 
 // var imageObj = new Image();
 // imageObj.src = "uploads/image.png";
@@ -53,13 +54,31 @@ function buildGrid(numSquares) {
       rgb.b = Math.floor(rgb.b / count);
 
       gridColors[i].push({r:rgb.r, g:rgb.g, b:rgb.b});
-      // context.fillStyle = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')';
-      //context.fillStyle = "rgb(120, 120, 120)";
-      // context.fillRect(j * gridSideLength, i * gridSideLength, gridSideLength, gridSideLength);
     }
-
   }
-  console.log(gridColors);
+  for (let c = 0; c < gridColors.length; c++) {
+    grid.push([]);
+      for (let r = 0; r < gridColors.length; r++) {
+          var allPalletes = [].concat.apply([], palette1.concat(palette2));
+          let min = {
+            index: -1,
+            distance: 1
+          };
+          let imageColour = gridColors[c][r];
+          console.log(imageColour, c, r);
+          for (let i = 0; i < allPalletes.length; i++) {
+            let rgbPalleteColour = hexToRgb(allPalletes[i]);
+            let colourDistance = Math.sqrt((rgbPalleteColour.r-imageColour.r)^2+(rgbPalleteColour.g-imageColour.g)^2+(rgbPalleteColour.b-imageColour.b)^2)/Math.sqrt((255)^2+(255)^2+(255)^2);
+            if (colourDistance < min.distance) {
+              min = {
+                index: i,
+                distance: colourDistance
+              };
+            }
+          }
+          grid[c].push({ x:0, y:0, n: min.index + 1, status: 0 });
+      }
+  }
 }
 // var testGrid = [[1,1,1,1,1,1,1,1,1,1],
 //             [1,2,1,1,1,1,1,1,1,1],
@@ -82,7 +101,6 @@ var myGameArea = {
     canvas : document.createElement("canvas"),
     context: "",
     start : function() {
-      console.log("hi");
         this.canvas.width = screen.width;
         this.canvas.height = window.innerHeight;
         this.context = this.canvas.getContext("2d");
@@ -106,31 +124,29 @@ function createCanvas() {
   canvas.height = window.innerHeight;
 }
 
-var grid = testGrid;
-for (let c = 0; c < testGrid.length; c++) {
-    for (let r = 0; r < testGrid.length; r++) {
-        var allPalletes = [].concat.apply([], palette1.concat(palette2));
-        let min = {
-          index: -1,
-          distance: 1
-        };
-        for (let i = 0; i < allPalletes.length; i++) {
-          let rgbPalleteColour = hexToRgb(allPalletes[i]);
-          let imageColour = testGrid[c][r];
-          let colourDistance = Math.sqrt((rgbPalleteColour.r-imageColour.r)^2+(rgbPalleteColour.r-imageColour.r)^2+(rgbPalleteColour.r-imageColour.r)^2)/Math.sqrt((255)^2+(255)^2+(255)^2);
-          if (colourDistance < min.distance) {
-            min = {
-              index: i,
-              distance: colourDistance
-            };
-          }
-        }
-        grid[c][r] = { x:0, y:0, n: min.index + 1, status: 0 };
-    }
-}
+// for (let c = 0; c < testGrid.length; c++) {
+//     for (let r = 0; r < testGrid.length; r++) {
+//         var allPalletes = [].concat.apply([], palette1.concat(palette2));
+//         let min = {
+//           index: -1,
+//           distance: 1
+//         };
+//         for (let i = 0; i < allPalletes.length; i++) {
+//           let rgbPalleteColour = hexToRgb(allPalletes[i]);
+//           let imageColour = testGrid[c][r];
+//           let colourDistance = Math.sqrt((rgbPalleteColour.r-imageColour.r)^2+(rgbPalleteColour.r-imageColour.r)^2+(rgbPalleteColour.r-imageColour.r)^2)/Math.sqrt((255)^2+(255)^2+(255)^2);
+//           if (colourDistance < min.distance) {
+//             min = {
+//               index: i,
+//               distance: colourDistance
+//             };
+//           }
+//         }
+//         grid[c][r] = { x:0, y:0, n: min.index + 1, status: 0 };
+//     }
+// }
 
 function startGame() {
-  console.log("hi");
     // myGameArea.start();
     createCanvas();
     let canvas = document.getElementById("myCanvas");
@@ -162,7 +178,6 @@ function hexToRgb(hex) {
 function drawPalette(arr, posn) {
   let canvas = document.getElementById("myCanvas");
   let context = canvas.getContext("2d");
-  console.log(canvas.height, screen.height);
     let squareLen = canvas.height / 6;
     for (let r = 0; r < 6; r++) {
         let posn1 = posn;
@@ -221,8 +236,8 @@ function drawGrid(arr) {
     }
 }
 
-var origX = grid[0][0].x;
-var origY = grid[0][0].y;
+// var origX = grid[0][0].x;
+// var origY = grid[0][0].y;
 
 
 function mouseClick(e) {
@@ -233,7 +248,6 @@ function mouseClick(e) {
     let y = e.screenY;
     let r = Math.floor((x - ((myGameArea.width / 2) - myGameArea.height / 2)) / squareLen);
     let c = Math.floor(y / squareLen);
-    console.log(r, c, x, y,((myGameArea.width / 2) - myGameArea.height / 2), squareLen, myGameArea.width);
     if (0 == grid[c][r].status && grid[c][r].n == currentStatus) {
         grid[c][r].status = 1;
     }
