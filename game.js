@@ -13,6 +13,7 @@ var currentStatus = 0;
 //
 var testGrid = [[0,0,0], [0,0,0], [0,0,0]];
 
+<<<<<<< Updated upstream
 var currentStatus = 1;
 
 var myGameArea = {
@@ -31,9 +32,16 @@ var myGameArea = {
 }
 
         
+=======
+palette1=[["#D35400","#C0392B","#9B59B6","#2980B9","#1ABC9C","#27AE60"],["#E67E22","#E74C3C","#8E44AD","#3498DB","#16A085","#2ECC71"]];
+palette2=[["#F08080","#F1C40F", "#ECF0F1","#95A5A6","#34495E","#1B2631"],["#E9967A", "#F39C12", "#BDC3C7","#7F8C8D","#2C3E50","#17202A"]];
+
+>>>>>>> Stashed changes
 var grid = testGrid;
 for (let c = 0; c < testGrid.length; c++) {
     for (let r = 0; r < testGrid.length; r++) {
+        var newT = palette1 + palette2;
+        console.log(newT);
         grid[c][r] = { x:0, y:0, n: testGrid[c][r], status: 0 };
     }
 }
@@ -46,11 +54,29 @@ function startGame() {
     drawPalette(palette2,[myGameArea.canvas.width - (2 * (myGameArea.canvas.height / palette2[0].length)),0]);
 }
 
+<<<<<<< Updated upstream
 palette1=[["#C0392B","#E74C3C","#9B59B6","#8E44AD","#2980B9","#3498DB"],["#1ABC9C","#16A085","#27AE60","#2ECC71","#F1C40F","#F39C12"]];
 palette2=[["#E67E22","#D35400","#ECF0F1","#BDC3C7","#95A5A6","#7F8C8D"],["#34495E","#2C3E50","#F08080","#E9967A","#1B2631","#17202A"]];
 palette=["#C0392B","#E74C3C","#9B59B6","#8E44AD","#2980B9","#3498DB","#1ABC9C","#16A085","#27AE60","#2ECC71","#F1C40F","#F39C12","#E67E22","#D35400","#ECF0F1","#BDC3C7","#95A5A6","#7F8C8D","#34495E","#2C3E50","#F08080","#E9967A","#1B2631","#17202A"]
 // palette1 = [0,0,0,0,0,0,0,0,0,0,0,0];
 // palette2 = [0,0,0,0,0,0,0,0,0,0,0,0];
+=======
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+    }
+}
+
+// palette1=[["#C0392B","#E74C3C","#9B59B6","#8E44AD","#2980B9","#3498DB"],["#1ABC9C","#16A085","#27AE60","#2ECC71","#F1C40F","#F39C12"]];
+// palette2=[["#E67E22","#D35400","#ECF0F1","#BDC3C7","#95A5A6","#7F8C8D"],["#34495E","#2C3E50","#F08080","#E9967A","#1B2631","#17202A"]];
+
+
+
+>>>>>>> Stashed changes
 
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
