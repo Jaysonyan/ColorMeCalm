@@ -6,10 +6,14 @@ $(document).ready(function(){
   });
 
   let smit = document.getElementById('uploadImg');
+  let ez = document.getElementById('easy');
+  let me = document.getElementById('med');
+  let hd = document.getElementById('hard');
   smit.addEventListener('click',sub, false);
 
   function sub(){
     $('#select').text("Submitted.");
   }
+
 
 });

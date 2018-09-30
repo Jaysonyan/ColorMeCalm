@@ -134,7 +134,14 @@ form input[type=submit]{
     box-shadow: 3px 5px #349ab9;
     opacity:100%;
 }
-
+#difficulty{
+    position: relative;
+    left: -70px;
+    top: 5px;
+    font-size: 30px;
+    font-family: "Poor Richard";
+    color:cadetblue;
+}
 form input[type=submit]:hover{
     padding: 4px 28px;
     font-weight: bold;
