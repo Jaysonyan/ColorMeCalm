@@ -121,7 +121,7 @@ function createCanvas() {
   document.body.insertBefore(canvas, document.body.childNodes[0]);
   canvas.setAttribute('id', "myCanvas");
   canvas.addEventListener("click", mouseClick);
-  buildGrid(15);
+  buildGrid(20);
   canvas.width = screen.width;
   canvas.height = window.innerHeight;
 }
@@ -188,18 +188,18 @@ function drawPalette(arr, posn, offset) {
             let element = (c * 6) + r + 1 + offset;
 
             context.beginPath();
-            
+
             context.rect(posn1[0] + (squareLen * c), posn1[1] + (squareLen * r), squareLen, squareLen);
             context.fillStyle = arr[c][r];
             context.fill();
 
             context.closePath();
             context.beginPath();
-            
+
             context.rect(posn1[0] + (squareLen * c), posn1[1] + (squareLen * r), squareLen / 6, squareLen / 6);
             context.fillStyle = "white"
             context.fill();
-            
+
             context.closePath();
             context.beginPath();
 
@@ -286,7 +286,7 @@ function drawGrid(arr) {
 // }
 
 function mouseClick(e) {
-    let canvas = document.getElementById('myCanvas')
+    let canvas = document.getElementById('myCanvas');
     let squareLen = canvas.height / grid.length;
     let x = e.layerX;
     let y = e.layerY;
@@ -320,6 +320,25 @@ function mouseClick(e) {
     drawGrid(grid);
     drawPalette(palette1,[0,0], 0);
     drawPalette(palette2,[canvas.width - (2 * (canvas.height / palette2[0].length)),0], 12);
+    checkFinished();
+}
+
+function checkFinished() {
+  let canvas = document.getElementById('myCanvas');
+  let context = canvas.getContext("2d");
+
+  if (counter == grid.length*grid.length) {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    drawGrid(grid);
+    // context.beginPath();
+    // context.lineWidth=1;
+    // context.font = "100px serif";
+    // context.textAlign = "left"
+    // context.textBaseline = "hanging";
+    // context.fillStyle = "black"
+    // context.fillText("YOU WIN!", 150, 150);
+    // context.closePath();
+  }
 }
 
 /*
