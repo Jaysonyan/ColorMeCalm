@@ -1,4 +1,4 @@
-var currentStatus = 0;
+var currentSelection = 0;
 let palette1=[["#d35400","#c0392b","#9b59b6","#2980b9","#1abc9c","#27ae60"],["#e67e22","#e74c3c","#8e44ad","#3498db","#16a085","#2ecc71"]];
 let palette2=[["#f08080","#f1c40f", "#ecf0f1","#95a5a6","#34495e","#1b2631"],["#e9967a", "#f39c12", "#bdc3c7","#7f8c8d","#2c3e50","#17202a"]];
 var grid = [];
@@ -94,8 +94,6 @@ function buildGrid(numSquares) {
 var testGrid = [[{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15}],
 [{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15}],
 [{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15}]];
-
-var currentStatus = 1;
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
@@ -200,7 +198,7 @@ function drawGrid(arr) {
     var halfHeight=myGameArea.height / 2;
     var squareLen=myGameArea.height/arr.length;
     var centre=[halfWidth,halfHeight];
-    let fontSize = "50px";
+    let fontSize = "20px";
     for (let row of arr) {
         let posn=[centre[0] - halfHeight, centre[1] - halfHeight + squareLen * r];
         for (let num of row) {
@@ -209,6 +207,7 @@ function drawGrid(arr) {
             context.beginPath();
 
             if (num.status == 1) {
+                context.rect(posn[0], posn[1], squareLen, squareLen);
                 context.fillStyle = palette[num.n];
                 context.fill();
 
@@ -240,31 +239,59 @@ function drawGrid(arr) {
 // var origY = grid[0][0].y;
 
 
-function mouseClick(e) {
-    let myGameArea = document.getElementById("myCanvas");
+// function mouseClick(e) {
+//     let myGameArea = document.getElementById("myCanvas");
+//
+//     let squareLen = myGameArea.height / grid.length;
+//     let x = e.screenX;
+//     let y = e.screenY;
+//     let r = Math.floor((x - ((myGameArea.width / 2) - myGameArea.height / 2)) / squareLen);
+//     let c = Math.floor(y / squareLen);
+//     if (0 == grid[c][r].status && grid[c][r].n == currentStatus) {
+//         grid[c][r].status = 1;
+//     }
+//     grid[c][r].status = 1;
+//     alert(r,c);
+// }
 
-    let squareLen = myGameArea.height / grid.length;
-    let x = e.screenX;
-    let y = e.screenY;
-    let r = Math.floor((x - ((myGameArea.width / 2) - myGameArea.height / 2)) / squareLen);
-    let c = Math.floor(y / squareLen);
-    if (0 == grid[c][r].status && grid[c][r].n == currentStatus) {
-        grid[c][r].status = 1;
+function mouseClick(e) {
+    let canvas = document.getElementById('myCanvas')
+    let squareLen = canvas.height / grid.length;
+    let x = e.layerX;
+    let y = e.layerY;
+    let c = Math.floor((x - ((canvas.width / 2) - canvas.height / 2)) / squareLen);
+    let r = Math.floor(y / squareLen);
+    //console.log(r, c, x, y,((canvas.width / 2) - canvas.height / 2), squareLen, canvas.height);
+    if (r < 0 || c < 0 || c >= grid.length || r >= grid.length) {
+        let paletteLen = canvas.height / (palette1[0].length);
+        let c2 = Math.floor(x / paletteLen);
+        let r2 = Math.floor(y / paletteLen);
+        console.log(currentSelection);
+        currentSelection = (c2 * 6) + r2;
     }
-    grid[c][r].status = 1;
-    alert(r,c);
+    else if (grid[r][c].n == currentSelection && grid[r][c].status == 0) {
+        grid[r][c].status = 1;
+    }
+    //console.log(r, c, grid[r][c].status, grid[r][c].n)
+    console.log(c, r)
+    console.log(currentSelection, grid[r][c].status);
+    console.log(grid);
+
 }
 
 
 function updateGameArea() {
-    myGameArea.clear();
+    //myGameArea.clear();
+    let canvas = document.getElementById('myCanvas');
+    let context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
     drawGrid(grid);
     drawPalette(palette1,[0,0]);
-    drawPalette(palette2,[myGameArea.canvas.width - (2 * (myGameArea.canvas.height / palette2[0].length)),0]);
+    drawPalette(palette2,[canvas.width - (2 * (canvas.height / palette2[0].length)),0]);
 }
 
 
-// setInterval(updateGameArea, 10);
+setInterval(updateGameArea, 10);
 
 // document.addEventListener("DOMContentLoaded", function(e) {
 //   startGame();
