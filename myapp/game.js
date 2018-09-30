@@ -34,7 +34,7 @@ function buildGrid(numSquares) {
   context.clearRect(0, 0, canvas.width, canvas.height);
   // "blurring" image through averaging colors
 
-  var gridSideLength = Math.round(sideLength / numSquares);
+  var gridSideLength = Math.floor(sideLength / numSquares);
   var gridColors = [];
   var l = data[i*30];
   for (var i = 0; i < numSquares; i++) {
@@ -74,10 +74,6 @@ function buildGrid(numSquares) {
           for (let i = 0; i < allPalletes.length; i++) {
             let rgbPalleteColour = hexToRgb(allPalletes[i]);
             let colourDistance = Math.sqrt(Math.pow(rgbPalleteColour.r-imageColour.r, 2)+Math.pow(rgbPalleteColour.g-imageColour.g, 2)+Math.pow(rgbPalleteColour.b-imageColour.b, 2))/Math.sqrt(Math.pow(255, 2)*3);
-            if (colourDistance < 1) {
-            } else {
-              // console.log(imageColour, pow(rgbPalleteColour.r-imageColour.r, 2), pow(rgbPalleteColour.g-imageColour.g, 2),pow(rgbPalleteColour.b-imageColour.b, 2));
-            }
             if (colourDistance < min.distance) {
               min = {
                 index: i,

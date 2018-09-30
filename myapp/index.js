@@ -21,6 +21,9 @@ app.post('/upload', function(req, res) {
         console.log(err);
         res.send("error occured");
       }
+      else {
+        res.sendFile(__dirname + "/game.html");
+      }
     });
   }
 });
