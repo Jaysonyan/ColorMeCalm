@@ -1,16 +1,17 @@
 var currentStatus = 1;
 
-var testGrid = [[1,1,1,1,1,1,1,1,1,1],
-            [1,2,1,1,1,1,1,1,1,1],
-            [1,1,3,1,1,1,1,1,1,1],
-            [1,1,1,4,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,6,1,1,1,1,1,1],
-            [1,1,19,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1],
-        ]
+// var testGrid = [[1,1,1,1,1,1,1,1,1,1],
+//             [1,2,1,1,1,1,1,1,1,1],
+//             [1,1,3,1,1,1,1,1,1,1],
+//             [1,1,1,4,1,1,1,1,1,1],
+//             [1,1,1,1,1,1,1,1,1,1],
+//             [1,1,1,1,1,1,1,1,1,1],
+//             [1,1,1,6,1,1,1,1,1,1],
+//             [1,1,19,1,1,1,1,1,1,1],
+//             [1,1,1,1,1,1,1,1,1,1],
+//             [1,1,1,1,1,1,1,1,1,1],];
+//
+var testGrid = [[0,0,0], [0,0,0], [0,0,0]];
 
 var grid = testGrid;
 for (let c = 0; c < testGrid.length; c++) {
@@ -22,16 +23,12 @@ for (let c = 0; c < testGrid.length; c++) {
 
 console.log(grid)
 
-function color(num) {
-    return palette[num];
-}
-
 function startGame() {
     myGameArea.start();
     myGameArea.canvas.setAttribute('id', "myCanvas");
     drawGrid(grid);
     drawPalette(palette1,[0,0]);
-    drawPalette(palette2,[myGameArea.canvas.width - (2 * (myGameArea.canvas.height / (palette2.length / 2))),0]);
+    drawPalette(palette2,[myGameArea.canvas.width - (2 * (myGameArea.canvas.height / palette2[0].length)),0]);
 }
 
 var myGameArea = {
@@ -44,17 +41,27 @@ var myGameArea = {
     }
 }
 
-palette1=[1,2,3,4,5,6,7,8,9,10,11,12];
-palette2=[13,14,15,16,17,18,19,20,21,22,23,24];
+palette1=[["#C0392B","#E74C3C","#9B59B6","#8E44AD","#2980B9","#3498DB"],["#1ABC9C","#16A085","#27AE60","#2ECC71","#F1C40F","#F39C12"]];
+palette2=[["#E67E22","#D35400","#ECF0F1","#BDC3C7","#95A5A6","#7F8C8D"],["#34495E","#2C3E50","#F08080","#E9967A","#1B2631","#17202A"]];
+// palette1 = [0,0,0,0,0,0,0,0,0,0,0,0];
+// palette2 = [0,0,0,0,0,0,0,0,0,0,0,0];
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
 
 function drawPalette(arr, posn) {
-    let squareLen = myGameArea.canvas.height / (arr.length / 2);
+    let squareLen = myGameArea.canvas.height / (arr[0].length);
     for (let r = 0; r < 6; r++) {
         let posn1 = posn;
         for (let c = 0; c < 2; c++) {
             myGameArea.context.beginPath();
             myGameArea.context.rect(posn1[0] + (squareLen * c), posn1[1] + (squareLen * r), squareLen, squareLen);
-            myGameArea.context.fillStyle = "#ffffff"
+            myGameArea.context.fillStyle = arr[c][r];
             myGameArea.context.fill();
             myGameArea.context.stroke();
             myGameArea.context.closePath();
