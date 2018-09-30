@@ -1,4 +1,7 @@
-var currentStatus = 0;
+// TODO:
+// ADD NUMBERS TO PALETTE
+
+let currentSelection = 0;
 
 // var testGrid = [[1,1,1,1,1,1,1,1,1,1],
 //             [1,2,1,1,1,1,1,1,1,1],
@@ -11,18 +14,15 @@ var currentStatus = 0;
 //             [1,1,1,1,1,1,1,1,1,1],
 //             [1,1,1,1,1,1,1,1,1,1],];
 //
-var testGrid = [[0,0,0], [0,0,0], [0,0,0]];
-
-var currentStatus = 1;
+var testGrid = [[0,1,2], [3,4,5], [0,0,0]];
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = screen.width;
+        this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-   //     this.canvas.setAttribute('id', "myCanvas");
         this.canvas.addEventListener("click", mouseClick);
     },
     clear : function() {
@@ -32,11 +32,17 @@ var myGameArea = {
 
         
 var grid = testGrid;
-for (let c = 0; c < testGrid.length; c++) {
-    for (let r = 0; r < testGrid.length; r++) {
+for (let r = 0; r < testGrid.length; r++) {
+    for (let c = 0; c < testGrid.length; c++) {
         grid[c][r] = { x:0, y:0, n: testGrid[c][r], status: 0 };
     }
 }
+console.log(grid);
+
+var paletteGrid1 = [];
+
+
+var paletteGrid2 = [];
 
 
 function startGame() {
@@ -46,7 +52,7 @@ function startGame() {
     drawPalette(palette2,[myGameArea.canvas.width - (2 * (myGameArea.canvas.height / palette2[0].length)),0]);
 }
 
-palette1=[["#C0392B","#E74C3C","#9B59B6","#8E44AD","#2980B9","#3498DB"],["#1ABC9C","#16A085","#27AE60","#2ECC71","#F1C40F","#F39C12"]];
+let palette1=[["#C0392B","#E74C3C","#9B59B6","#8E44AD","#2980B9","#3498DB"],["#1ABC9C","#16A085","#27AE60","#2ECC71","#F1C40F","#F39C12"]];
 palette2=[["#E67E22","#D35400","#ECF0F1","#BDC3C7","#95A5A6","#7F8C8D"],["#34495E","#2C3E50","#F08080","#E9967A","#1B2631","#17202A"]];
 palette=["#C0392B","#E74C3C","#9B59B6","#8E44AD","#2980B9","#3498DB","#1ABC9C","#16A085","#27AE60","#2ECC71","#F1C40F","#F39C12","#E67E22","#D35400","#ECF0F1","#BDC3C7","#95A5A6","#7F8C8D","#34495E","#2C3E50","#F08080","#E9967A","#1B2631","#17202A"]
 // palette1 = [0,0,0,0,0,0,0,0,0,0,0,0];
@@ -89,10 +95,12 @@ function drawGrid(arr) {
             let element=num.n.toString();
 
             myGameArea.context.beginPath();
-
+            //console.log(num);
             if (num.status == 1) {
+                myGameArea.context.rect(posn[0], posn[1], squareLen, squareLen);
                 myGameArea.context.fillStyle = palette[num.n];
                 myGameArea.context.fill();
+                myGameArea.context.stroke();
 
             } else {
                 myGameArea.context.rect(posn[0], posn[1], squareLen, squareLen);
@@ -124,16 +132,26 @@ var origY = grid[0][0].y;
 
 function mouseClick(e) {
     let squareLen = myGameArea.canvas.height / grid.length;
-    let x = e.screenX;
-    let y = e.screenY;
-    let r = Math.floor((x - ((myGameArea.canvas.width / 2) - myGameArea.canvas.height / 2)) / squareLen);
-    let c = Math.floor(y / squareLen);
-    console.log(r, c, x, y,((myGameArea.canvas.width / 2) - myGameArea.canvas.height / 2), squareLen, myGameArea.canvas.width);
-    if (0 == grid[c][r].status && grid[c][r].n == currentStatus) {
-        grid[c][r].status = 1;
+    let x = e.layerX;
+    let y = e.layerY;
+    let c = Math.floor((x - ((myGameArea.canvas.width / 2) - myGameArea.canvas.height / 2)) / squareLen);
+    let r = Math.floor(y / squareLen);
+    //console.log(r, c, x, y,((myGameArea.canvas.width / 2) - myGameArea.canvas.height / 2), squareLen, myGameArea.canvas.height);
+    if (r < 0 || c < 0 || c >= grid.length || r >= grid.length) {
+        let paletteLen = myGameArea.canvas.height / (palette1[0].length);
+        let c2 = Math.floor(x / paletteLen);
+        let r2 = Math.floor(y / paletteLen);
+        console.log(currentSelection);
+        currentSelection = (c2 * 6) + r2;
     }
-    grid[c][r].status = 1;
-    alert(r,c);
+    else if (grid[r][c].n == currentSelection && grid[r][c].status == 0) {
+        grid[r][c].status = 1;
+    }
+    //console.log(r, c, grid[r][c].status, grid[r][c].n)
+    console.log(c, r)
+    console.log(currentSelection, grid[r][c].status);
+    console.log(grid);
+
 }
 
 
