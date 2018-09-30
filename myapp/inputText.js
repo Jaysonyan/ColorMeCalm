@@ -9,7 +9,6 @@ $(document).ready(function(){
     smit.addEventListener('click',sub, false);
 
     function sub(){
-      var button = document.getElementById('uploadImg');
       $('#select').text("Submitted.");
     }
 

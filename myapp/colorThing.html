@@ -16,6 +16,7 @@
     <canvas id="myCanvas" width="578" height="400"></canvas>
     <script>
       function drawImage(imageObj) {
+        console.log(imageObj, imageObj.height, imageObj.width);
         var canvas = document.getElementById('myCanvas');
         var context = canvas.getContext('2d');
         var sideLength = Math.max(imageObj.height, imageObj.width);

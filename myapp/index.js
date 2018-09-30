@@ -29,7 +29,7 @@ app.get('/image', (req, res) => {
   res.sendFile(__dirname + '/uploads/image.png');
 });
 
-app.get("/pixel", (req, res) => {
+app.get("/begin", (req, res) => {
   res.sendFile(__dirname + '/colorThing.html');
 });
 
