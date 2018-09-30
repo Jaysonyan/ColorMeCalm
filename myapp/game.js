@@ -16,7 +16,8 @@ imageObj.onload = function() {
 }
 
 function buildGrid(numSquares) {
-  console.log(numSquares);
+
+
   var canvas = document.getElementById('myCanvas');
   var context = canvas.getContext('2d');
   var sideLength = Math.max(imageObj.height, imageObj.width);
@@ -83,6 +84,20 @@ function buildGrid(numSquares) {
       }
   }
 }
+// var testGrid = [[1,1,1,1,1,1,1,1,1,1],
+//             [1,2,1,1,1,1,1,1,1,1],
+//             [1,1,3,1,1,1,1,1,1,1],
+//             [1,1,1,4,1,1,1,1,1,1],
+//             [1,1,1,1,1,1,1,1,1,1],
+//             [1,1,1,1,1,1,1,1,1,1],
+//             [1,1,1,6,1,1,1,1,1,1],
+//             [1,1,19,1,1,1,1,1,1,1],
+//             [1,1,1,1,1,1,1,1,1,1],
+//             [1,1,1,1,1,1,1,1,1,1],];
+//
+var testGrid = [[{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15}],
+[{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15}],
+[{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15},{r : 13, g : 14, b : 15}]];
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
@@ -106,28 +121,38 @@ function createCanvas() {
   document.body.insertBefore(canvas, document.body.childNodes[0]);
   canvas.setAttribute('id', "myCanvas");
   canvas.addEventListener("click", mouseClick);
-  // fetch("difficulty.json")
-  // .then(response => response.json())
-  // .then(json => console.log(json.dimension))
-  // .then(json => buildGrid(json.dimension))
-  // .then(canvas.width = screen.width)
-  // .then(canvas.height = window.innerHeight);
-  $.ajaxSetup({
-      async: false
-  });
-  $.getJSON("difficulty.json", function(json) {
-    buildGrid(json.dimension);
-    canvas.width = screen.width;
-    canvas.height = window.innerHeight
-  })
+  buildGrid(5);
+  canvas.width = screen.width;
+  canvas.height = window.innerHeight;
 }
 
+// for (let c = 0; c < testGrid.length; c++) {
+//     for (let r = 0; r < testGrid.length; r++) {
+//         var allPalletes = [].concat.apply([], palette1.concat(palette2));
+//         let min = {
+//           index: -1,
+//           distance: 1
+//         };
+//         for (let i = 0; i < allPalletes.length; i++) {
+//           let rgbPalleteColour = hexToRgb(allPalletes[i]);
+//           let imageColour = testGrid[c][r];
+//           let colourDistance = Math.sqrt((rgbPalleteColour.r-imageColour.r)^2+(rgbPalleteColour.r-imageColour.r)^2+(rgbPalleteColour.r-imageColour.r)^2)/Math.sqrt((255)^2+(255)^2+(255)^2);
+//           if (colourDistance < min.distance) {
+//             min = {
+//               index: i,
+//               distance: colourDistance
+//             };
+//           }
+//         }
+//         grid[c][r] = { x:0, y:0, n: min.index + 1, status: 0 };
+//     }
+// }
 
 function startGame() {
     // myGameArea.start();
     createCanvas();
     let canvas = document.getElementById("myCanvas");
-    drawGrid(grid);
+    drawGrid(grid, false);
 
     drawPalette(palette1,[0,0], 0);
     drawPalette(palette2,[canvas.width - (2 * (canvas.height / palette2[0].length)),0], 12);
@@ -195,14 +220,17 @@ function drawPalette(arr, posn, offset) {
     }
 }
 
-function drawGrid(arr) {
+function drawGrid(arr, finished) {
     let myGameArea = document.getElementById("myCanvas");
     let context = myGameArea.getContext("2d");
     let r=0;
     var halfWidth=myGameArea.width / 2;
     var halfHeight=myGameArea.height / 2;
     var squareLen=myGameArea.height/arr.length;
-    var centre=[halfWidth,halfHeight];
+    if (finished){
+        var centre=[myGameArea.width/4,halfHeight];
+    } else { var centre = [halfWidth, halfHeight];}
+
     let fontSize = "20px";
     for (let row of arr) {
         let posn=[centre[0] - halfHeight, centre[1] - halfHeight + squareLen * r];
@@ -238,6 +266,10 @@ function drawGrid(arr) {
             posn[0] = posn[0] + squareLen;
         }
         r++;
+    }
+
+    if (finished) {
+        context.drawImage(imageObj, halfWidth-0.014*myGameArea.width, 0, halfWidth, myGameArea.height);
     }
 }
 
@@ -292,7 +324,7 @@ function mouseClick(e) {
     //let canvas = document.getElementById('myCanvas');
     let context = canvas.getContext("2d");
     context.clearRect(0, 0, canvas.width, canvas.height);
-    drawGrid(grid);
+    drawGrid(grid, false);
     drawPalette(palette1,[0,0], 0);
     drawPalette(palette2,[canvas.width - (2 * (canvas.height / palette2[0].length)),0], 12);
     checkFinished();
@@ -304,7 +336,7 @@ function checkFinished() {
 
   if (counter == grid.length*grid.length) {
     context.clearRect(0, 0, canvas.width, canvas.height);
-    drawGrid(grid);
+    drawGrid(grid, true);
     // context.beginPath();
     // context.lineWidth=1;
     // context.font = "100px serif";

@@ -68,7 +68,7 @@ body {
     opacity: 0.97;
     background-size: 100%;
 }
-form{
+form {
     position: absolute;
     top: 110%;
     left: 50%;
@@ -121,7 +121,7 @@ form input[type=submit]{
 
 #easy{right: 300%;}
 #hard{left: 465%;}
-#med{position: absolute; left: -56%;}
+#med{left: 41%;}
 
 #easy:hover,#easy:active,#med:hover,#med:active,#hard:hover,#hard:active{
     font-weight: bold;
