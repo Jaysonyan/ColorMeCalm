@@ -80,7 +80,7 @@ function buildGrid(numSquares) {
               };
             }
           }
-          grid[c].push({ x:0, y:0, n: min.index + 1, status: 0 });
+          grid[c].push({ x:0, y:0, n: min.index + 1, status: 1 });
       }
   }
 }
@@ -121,9 +121,14 @@ function createCanvas() {
   document.body.insertBefore(canvas, document.body.childNodes[0]);
   canvas.setAttribute('id', "myCanvas");
   canvas.addEventListener("click", mouseClick);
-  buildGrid(5);
-  canvas.width = screen.width;
-  canvas.height = window.innerHeight;
+  $.ajaxSetup({
+      async: false
+  });
+  $.getJSON("difficulty.json", function(json) {
+    buildGrid(json.dimension);
+    canvas.width = screen.width;
+    canvas.height = window.innerHeight
+  })
 }
 
 // for (let c = 0; c < testGrid.length; c++) {
@@ -334,7 +339,7 @@ function checkFinished() {
   let canvas = document.getElementById('myCanvas');
   let context = canvas.getContext("2d");
 
-  if (counter == grid.length*grid.length) {
+  if (counter == grid.length*grid.length || true) {
     context.clearRect(0, 0, canvas.width, canvas.height);
     drawGrid(grid, true);
     // context.beginPath();
