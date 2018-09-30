@@ -189,9 +189,22 @@ function drawPalette(arr, posn, offset) {
             let element = (c * 6) + r + 1 + offset + "";
 
             context.beginPath();
+            
             context.rect(posn1[0] + (squareLen * c), posn1[1] + (squareLen * r), squareLen, squareLen);
             context.fillStyle = arr[c][r];
             context.fill();
+
+            context.closePath();
+            context.beginPath();
+            
+            context.rect(posn1[0] + (squareLen * c), posn1[1] + (squareLen * r), squareLen / 6, squareLen / 6);
+            context.fillStyle = "white"
+            context.fill();
+            
+            context.closePath();
+            context.beginPath();
+
+            context.rect(posn1[0] + (squareLen * c), posn1[1] + (squareLen * r), squareLen, squareLen);
             context.stroke();
             context.font = fontSize + " serif";
             context.textAlign = "left"
@@ -223,6 +236,7 @@ function drawGrid(arr) {
                 context.rect(posn[0], posn[1], squareLen, squareLen);
                 context.fillStyle = palette[num.n - 1];
                 context.fill();
+                context.stroke();
 
             } else {
                 context.rect(posn[0], posn[1], squareLen, squareLen);
@@ -288,15 +302,24 @@ function mouseClick(e) {
         console.log(c2,r2)
     } else if (grid[r][c].n == currentSelection && grid[r][c].status == 0) {
         grid[r][c].status = 1;
+        counter++;
     }
     //console.log(r, c, grid[r][c].status, grid[r][c].n)
     console.log(c2, r2)
     console.log(currentSelection, grid[r][c].status);
     console.log(grid);
 
+    //updates
+    //let canvas = document.getElementById('myCanvas');
+    let context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    drawGrid(grid);
+    drawPalette(palette1,[0,0], 0);
+    drawPalette(palette2,[canvas.width - (2 * (canvas.height / palette2[0].length)),0], 12);
+
 }
 
-
+/*
 function updateGameArea() {
     //myGameArea.clear();
     let canvas = document.getElementById('myCanvas');
@@ -306,9 +329,9 @@ function updateGameArea() {
     drawPalette(palette1,[0,0], 0);
     drawPalette(palette2,[canvas.width - (2 * (canvas.height / palette2[0].length)),0], 12);
 }
+*/
 
-
-setInterval(updateGameArea, 10);
+//setInterval(updateGameArea, 10);
 
 // document.addEventListener("DOMContentLoaded", function(e) {
 //   startGame();
