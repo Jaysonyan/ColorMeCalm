@@ -117,7 +117,7 @@ function createCanvas() {
   document.body.insertBefore(canvas, document.body.childNodes[0]);
   canvas.setAttribute('id', "myCanvas");
   canvas.addEventListener("click", mouseClick);
-  buildGrid(50);
+  buildGrid(25);
   canvas.width = screen.width;
   canvas.height = window.innerHeight;
 }
@@ -302,7 +302,7 @@ function mouseClick(e) {
 
 }
 
-/*
+
 function updateGameArea() {
     //myGameArea.clear();
     let canvas = document.getElementById('myCanvas');
@@ -312,9 +312,10 @@ function updateGameArea() {
     drawPalette(palette1,[0,0]);
     drawPalette(palette2,[canvas.width - (2 * (canvas.height / palette2[0].length)),0]);
 }
-*/
 
-//setInterval(updateGameArea, 10);
+
+
+setInterval(updateGameArea, 500);
 
 // document.addEventListener("DOMContentLoaded", function(e) {
 //   startGame();
