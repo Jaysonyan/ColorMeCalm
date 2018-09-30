@@ -22,7 +22,7 @@ app.post('/upload', function(req, res) {
         res.send("error occured");
       }
       else {
-        res.sendFile(__dirname + '/colorThing.html');
+        res.sendFile(__dirname + '/game.html');
       }
     });
   }
