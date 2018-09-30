@@ -37,7 +37,7 @@ padding-left: 145px;
 
 
 .btn-lg{
-
+    position: relative;
     padding:30px 80px;
     font-size:70px;
     border-radius: 50px;
