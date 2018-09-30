@@ -65,10 +65,14 @@ function buildGrid(numSquares) {
             distance: 1
           };
           let imageColour = gridColors[c][r];
-          console.log(imageColour, c, r);
+          // console.log(min, c, r);
           for (let i = 0; i < allPalletes.length; i++) {
             let rgbPalleteColour = hexToRgb(allPalletes[i]);
-            let colourDistance = Math.sqrt((rgbPalleteColour.r-imageColour.r)^2+(rgbPalleteColour.g-imageColour.g)^2+(rgbPalleteColour.b-imageColour.b)^2)/Math.sqrt((255)^2+(255)^2+(255)^2);
+            let colourDistance = Math.sqrt(Math.pow(rgbPalleteColour.r-imageColour.r, 2)+Math.pow(rgbPalleteColour.g-imageColour.g, 2)+Math.pow(rgbPalleteColour.b-imageColour.b, 2))/Math.sqrt(Math.pow(255, 2)*3);
+            if (colourDistance < 1) {
+            } else {
+              // console.log(imageColour, pow(rgbPalleteColour.r-imageColour.r, 2), pow(rgbPalleteColour.g-imageColour.g, 2),pow(rgbPalleteColour.b-imageColour.b, 2));
+            }
             if (colourDistance < min.distance) {
               min = {
                 index: i,

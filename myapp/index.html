@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src= inputText.js></script>
     <meta charset="UTF-8">
     <title>title</title>
     <link rel="stylesheet" type = "text/css" href="style.css">
@@ -17,22 +16,22 @@
             </div>
         </div>
         <div class = "row">
-            <div class="col-sm-12 center-block text-center">
-                <p id ="select">Select image to upload:</p>
+            <div class="col-sm-12">
                 <form class = "fileupload" action="upload" method="post" enctype="multipart/form-data">
-                    <div class = "col-sm-4 col-sm-offset-1"><input type="file" name="fileToUpload" id="fileToUpload"></div>
-                    <br><br><br><br><br>
-                    <div class = "col-sm-2 col-sm-offset-4" id = "uploadImg"><input type="submit"></div>
-                    <br><br>
+                    Select image to upload:
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    <input type="submit">
                 </form>
             </div>
         </div>
-        <br><br><br><br><br>
+        <br><br><br>
         <div class="row">
+          <form action = "begin" method="get">
             <div class="col-sm-4 center-block text-center"><button type="button" class="btn btn-lg">Easy</button></div>
             <div class="col-sm-4 center-block text-center"><button type="button" class="btn btn-lg">Medium</button></div>
             <div class="col-sm-4 center-block text-center"><button type="button" class="btn btn-lg">Hard</button></div>
-
+            <input type="submit">
+          </form>
         </div>
     </body>
 </html>
