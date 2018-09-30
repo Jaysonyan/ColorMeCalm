@@ -18,6 +18,24 @@ padding-left: 145px;
     font-family: "Edwardian Script ITC";
 }
 
+#select{
+    font-size: 45px;
+    font-family: "Poor Richard";
+    color: cadetblue;
+}
+#fileToUpload{
+    position: relative;
+    right: 55px;
+    padding:30px 67px;
+    font-size: 20px;
+    background-color:#ffce85;
+    color: black;
+    font-family: "Poor Richard";
+    box-shadow: 3px 5px #8f5d00;
+    opacity: 0;
+}
+
+
 .btn-lg{
 
     padding:30px 80px;
@@ -28,9 +46,6 @@ padding-left: 145px;
     font-family: "Poor Richard";
     box-shadow: 5px 10px #349ab9;
 
-}
-.dropzone{
-    opacity: 0.7;
 }
 
 .btn-lg:hover,.btn-lg:active{
@@ -53,7 +68,7 @@ padding-left: 145px;
 
 .button {
     justify-content: center;
-}
+}   
 
 body {
     -webkit-box-sizing: border-box;
@@ -65,7 +80,54 @@ body {
     opacity: 0.97;
     background-size: 100%;
 }
+form{
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -250px;
+    width: 500px;
+    height: 100px;
+    border: 4px dashed #fff;
+  }
+form input[type=file]{
+    position: relative;
+    top: -4px;
+    left: -60px;
+    width: 500px;
+    height: 95px;
+    outline: none;
+    cursor: pointer;
+    opacity: 0;
 
-.dropzone {
-    padding: 0px
 }
+form input[type=file]:active{
+    position: relative;
+    top: -4px;
+    left: -60px;
+    width: 500px;
+    height: 95px;
+    outline: none;
+    opacity: 1;
+
+}
+form input[type=submit]{
+    position: relative;
+    top: 5px;
+    left: 14px;
+    padding: 4px 30px;
+    border-color: white;
+    border-radius: 10px;
+    background-color:#ffce85;
+    box-shadow: -3px -2px inset #fcc471;
+}
+form input[type=submit]:hover{
+    padding: 4px 28px;
+    font-weight: bold;
+    background-color: #fdc673;
+}
+
+
+  
+  
+  
