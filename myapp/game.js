@@ -2,6 +2,8 @@ var currentSelection = 0;
 
 let palette1=[["#d35400","#c0392b","#9b59b6","#2980b9","#1abc9c","#27ae60"],["#e67e22","#e74c3c","#8e44ad","#3498db","#16a085","#2ecc71"]];
 let palette2=[["#f08080","#f1c40f", "#ecf0f1","#95a5a6","#34495e","#1b2631"],["#e9967a", "#f39c12", "#bdc3c7","#7f8c8d","#2c3e50","#17202a"]];
+let palette=["#d35400","#c0392b","#9b59b6","#2980b9","#1abc9c","#27ae60","#e67e22","#e74c3c","#8e44ad","#3498db","#16a085","#2ecc71",
+"#f08080","#f1c40f", "#ecf0f1","#95a5a6","#34495e","#1b2631","#e9967a", "#f39c12", "#bdc3c7","#7f8c8d","#2c3e50","#17202a"];
 var grid = [];
 
 // var imageObj = new Image();
@@ -118,7 +120,7 @@ function createCanvas() {
   document.body.insertBefore(canvas, document.body.childNodes[0]);
   canvas.setAttribute('id', "myCanvas");
   canvas.addEventListener("click", mouseClick);
-  buildGrid(25);
+  buildGrid(15);
   canvas.width = screen.width;
   canvas.height = window.innerHeight;
 }
@@ -151,8 +153,8 @@ function startGame() {
     let canvas = document.getElementById("myCanvas");
     drawGrid(grid);
 
-    drawPalette(palette1,[0,0]);
-    drawPalette(palette2,[canvas.width - (2 * (canvas.height / palette2[0].length)),0]);
+    drawPalette(palette1,[0,0], 0);
+    drawPalette(palette2,[canvas.width - (2 * (canvas.height / palette2[0].length)),0], 12);
 }
 
 var myGameArea = {
@@ -174,13 +176,16 @@ function hexToRgb(hex) {
     } : null;
 }
 
-function drawPalette(arr, posn) {
+function drawPalette(arr, posn, offset) {
+    let fontSize = "20px";
   let canvas = document.getElementById("myCanvas");
   let context = canvas.getContext("2d");
     let squareLen = canvas.height / 6;
     for (let r = 0; r < 6; r++) {
         let posn1 = posn;
         for (let c = 0; c < 2; c++) {
+            let element = (c * 6) + r + 1 + offset;
+
             context.beginPath();
             
             context.rect(posn1[0] + (squareLen * c), posn1[1] + (squareLen * r), squareLen, squareLen);
@@ -201,7 +206,7 @@ function drawPalette(arr, posn) {
             if (currentSelection == parseInt(element)) {
                 context.lineWidth=3;
             }
-            
+
             context.stroke();
             context.lineWidth=1;
             context.font = fontSize + " serif";
@@ -232,7 +237,7 @@ function drawGrid(arr) {
 
             if (num.status == 1) {
                 context.rect(posn[0], posn[1], squareLen, squareLen);
-                context.fillStyle = palette[num.n];
+                context.fillStyle = palette[num.n - 1];
                 context.fill();
                 context.stroke();
 
@@ -286,20 +291,24 @@ function mouseClick(e) {
     let y = e.layerY;
     let c = Math.floor((x - ((canvas.width / 2) - canvas.height / 2)) / squareLen);
     let r = Math.floor(y / squareLen);
+
+    let paletteLen = canvas.height / (palette1[0].length);
+    let c2 = Math.floor(x / paletteLen);
+    let r2 = Math.floor(y / paletteLen);
+
     //console.log(r, c, x, y,((canvas.width / 2) - canvas.height / 2), squareLen, canvas.height);
-    if (r < 0 || c < 0 || c >= grid.length || r >= grid.length) {
-        let paletteLen = canvas.height / (palette1[0].length);
-        let c2 = Math.floor(x / paletteLen);
-        let r2 = Math.floor(y / paletteLen);
-        console.log(currentSelection);
-        currentSelection = (c2 * 6) + r2;
-    }
-    else if (grid[r][c].n == currentSelection && grid[r][c].status == 0) {
+    if (x <= paletteLen * 2) {
+        currentSelection = (c2 * 6) + r2 + 1;
+    } else if (x >= canvas.width - (paletteLen * 2)) {
+        c2 = Math.floor((x - canvas.width + (paletteLen * 2)) / paletteLen);
+        currentSelection = (c2 * 6) + r2 + 1 + 12;
+        console.log(c2,r2)
+    } else if (grid[r][c].n == currentSelection && grid[r][c].status == 0) {
         grid[r][c].status = 1;
         counter++;
     }
     //console.log(r, c, grid[r][c].status, grid[r][c].n)
-    console.log(c, r)
+    console.log(c2, r2)
     console.log(currentSelection, grid[r][c].status);
     console.log(grid);
 
@@ -310,10 +319,9 @@ function mouseClick(e) {
     drawGrid(grid);
     drawPalette(palette1,[0,0], 0);
     drawPalette(palette2,[canvas.width - (2 * (canvas.height / palette2[0].length)),0], 12);
-
 }
 
-
+/*
 function updateGameArea() {
     //myGameArea.clear();
     let canvas = document.getElementById('myCanvas');
@@ -323,10 +331,10 @@ function updateGameArea() {
     drawPalette(palette1,[0,0]);
     drawPalette(palette2,[canvas.width - (2 * (canvas.height / palette2[0].length)),0]);
 }
+*/
 
 
-
-setInterval(updateGameArea, 500);
+//setInterval(updateGameArea, 500);
 
 // document.addEventListener("DOMContentLoaded", function(e) {
 //   startGame();
