@@ -1,4 +1,5 @@
 var currentSelection = 0;
+var counter = 0;
 
 let palette1=[["#d35400","#c0392b","#9b59b6","#2980b9","#1abc9c","#27ae60"],["#e67e22","#e74c3c","#8e44ad","#3498db","#16a085","#2ecc71"]];
 let palette2=[["#f08080","#f1c40f", "#ecf0f1","#95a5a6","#34495e","#1b2631"],["#e9967a", "#f39c12", "#bdc3c7","#7f8c8d","#2c3e50","#17202a"]];
@@ -302,15 +303,15 @@ function mouseClick(e) {
     } else if (x >= canvas.width - (paletteLen * 2)) {
         c2 = Math.floor((x - canvas.width + (paletteLen * 2)) / paletteLen);
         currentSelection = (c2 * 6) + r2 + 1 + 12;
-        console.log(c2,r2)
+        //console.log(c2,r2)
     } else if (grid[r][c].n == currentSelection && grid[r][c].status == 0) {
         grid[r][c].status = 1;
         counter++;
     }
     //console.log(r, c, grid[r][c].status, grid[r][c].n)
-    console.log(c2, r2)
-    console.log(currentSelection, grid[r][c].status);
-    console.log(grid);
+    //console.log(c2, r2)
+    //console.log(currentSelection, grid[r][c].status);
+    //console.log(grid);
 
     //updates
     //let canvas = document.getElementById('myCanvas');
