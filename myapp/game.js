@@ -186,9 +186,9 @@ function drawGrid(arr, finished) {
     const squareLen=myGameArea.height/arr.length;
 
     if (finished ){
-        let centre=[myGameArea.width/4,halfHeight];
+        var centre=[myGameArea.width/4,halfHeight];
     } else { 
-        let centre = [halfWidth, halfHeight];
+        var centre = [halfWidth, halfHeight];
     }
 
     let fontSize = "20px";
