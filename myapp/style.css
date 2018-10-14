@@ -18,22 +18,8 @@ padding-left: 145px;
     font-family: "Edwardian Script ITC";
 }
 
-#select{
-    font-size: 45px;
-    font-family: "Poor Richard";
-    color: cadetblue;
-}
-#fileToUpload{
-    position: relative;
-    right: 55px;
-    padding:30px 67px;
-    font-size: 20px;
-    background-color:#ffce85;
-    color: black;
-    font-family: "Poor Richard";
-    box-shadow: 3px 5px #8f5d00;
-    opacity: 0;
-}
+
+
 
 
 .btn-lg{
@@ -68,37 +54,31 @@ body {
     opacity: 0.97;
     background-size: 100%;
 }
-form {
-    position: absolute;
-    top: 110%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -250px;
+#fileToUpload{
     width: 500px;
     height: 100px;
-    border: 4px dashed #fff;
-  }
-form input[type=file]{
     position: relative;
-    top: -4px;
-    left: -60px;
-    width: 500px;
-    height: 95px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    font-size: 20px;
+    background-color:#ffce85;
     outline: none;
     cursor: pointer;
-    opacity: 0;
+    color: black;
+    font-family: "Poor Richard";
+    box-shadow: 3px 5px #8f5d00;
+    border: 5px dashed #ffffff;
+  }
 
-}
-form input[type=file]:active{
+#select{
+    font-size: 45px;
     position: relative;
-    top: -4px;
-    left: -60px;
-    width: 500px;
-    height: 95px;
-    outline: none;
-    opacity: 1;
-
+    font-family: "Poor Richard";
+    color: cadetblue;
+    transform: translate(10%, -125%);
 }
+
 form input[type=submit]{
     position: relative;
     top: 5px;
@@ -109,19 +89,25 @@ form input[type=submit]{
     background-color:#ffce85;
     box-shadow: -3px -2px inset #fcc471;
 }
+
+.buttonchild{
+    position: relative;
+    top:70%;
+}
+
+/*
 #easy,#med,#hard{
     position: relative;
+    top: 50%;
     font-size: 80px;
-    top: -250px;
     padding: 10px 50px;
     border-radius: 40px;
     background-color:#93dff7;
     box-shadow: -3px -2px inset #349ab9;
-}
+}*/
 
-#easy{right: 300%;}
-#hard{left: 465%;}
-#med{left: 41%;}
+#easy{right: 50%;}
+#hard{left: 50%;}
 
 #easy:hover,#easy:active,#med:hover,#med:active,#hard:hover,#hard:active{
     font-weight: bold;
