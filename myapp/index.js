@@ -14,7 +14,6 @@ app.get('/', (req, res) => {
 
 app.post('/upload', function(req, res) {
   if (req.files) {
-    console.log(req.files)
     var file = req.files.fileToUpload,
       name = "image.png";
     var uploadpath = __dirname + '/uploads/' + name;
