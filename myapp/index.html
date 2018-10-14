@@ -17,22 +17,20 @@
             </div>
         </div>
         <br><br>
-        <div class = "row">
-            
-                
-                <form class = "fileupload" action="upload" method="post" enctype="multipart/form-data">
+        <form class = "fileupload" action="upload" method="post" enctype="multipart/form-data">
 
-                    <input type="file" name="fileToUpload" id="fileToUpload">
-                    <!--<p id ="select">Select image to upload:</p>
---><!--                   
-                    BUTTONS HERE DUDE
--->
-                    <div class = "buttonchild"><button type="submit" class="btn btn-lg" id = "easy">Easy</button></div>
-                    <div class = "buttonchild"><button type="submit" class="btn btn-lg" id = "medium">Medium</button></div>
-                    <div class = "buttonchild"><button type="submit" class="btn btn-lg" id = "hard">Hard</button></div>
+            <div id=dashBorder>
+                <input type="file" name="fileToUpload" id="fileToUpload">
+                <p id="select">Upload Image File</p>
+            </div>
 
-                </form>
-            
-        </div>
+            <!--                   
+            BUTTONS HERE DUDE -->            
+            <div id=buttonrow>
+                <button type="submit" class="myButton" id = "easy">Easy</button>
+                <button type="submit" class="myButton" id = "medium">Medium</button>
+                <button type="submit" class="myButton" id = "hard">Hard</button>
+            </div>
+        </form>
     </body>
 </html>

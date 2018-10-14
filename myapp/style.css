@@ -1,17 +1,10 @@
-html {
-padding-right: 145px;
-padding-left: 145px;
-}
 
 @page {
     margin-left: 5cm;
     margin-right: 5cm;
  }
 
-#upload {
-    border: 5px;
-    border-radius: 12%;
-}
+
 #title{
     color:rgb(236, 236, 236);
     font-size: 100pt;
@@ -22,26 +15,23 @@ padding-left: 145px;
 
 
 
-.btn-lg{
-    position: relative;
-    padding:30px 80px;
-    font-size:70px;
-    border-radius: 50px;
+.myButton{
+    padding:2% 4%;
+    border-radius: 30px;
     background-color:#93dff7;
-    color: rgb(0, 0, 0);
+    width:20%;
+    font-size: 200%;
     font-family: "Poor Richard";
     box-shadow: 5px 10px #349ab9;
-
+    margin-left: 6.5%;
+    margin-right: 6.5%;
+    justify-content: center;
 }
 
 
 .row {
     padding: 0px;
 
-}
-
-.button {
-    justify-content: center;
 }
 
 body {
@@ -54,29 +44,36 @@ body {
     opacity: 0.97;
     background-size: 100%;
 }
-#fileToUpload{
+
+#dashBorder{
     width: 500px;
     height: 100px;
     position: relative;
+    margin:auto;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -20%);
-    font-size: 20px;
-    background-color:#ffce85;
-    outline: none;
+    border:5px dashed #fff;
+}
+
+#fileToUpload{
+    font-size:0px;
+    width: 500px;
+    height: 100px;
+    position:relative;
+    top:-5px;
+    left:-5px;
+    /* top and left movements are for positioning with border*/
     cursor: pointer;
-    color: black;
-    font-family: "Poor Richard";
-    box-shadow: 3px 5px #8f5d00;
-    border: 5px dashed #ffffff;
-  }
+    opacity: 0.0;
+}
 
 #select{
-    font-size: 45px;
-    position: relative;
-    font-family: "Poor Richard";
+    position:relative;
+    top:-95%;
+    text-align: center;
+    font-size:45px;
+    font-family:"Poor Richard";
     color: cadetblue;
-    transform: translate(10%, -125%);
+    z-index:-1;
 }
 
 form input[type=submit]{
@@ -90,46 +87,10 @@ form input[type=submit]{
     box-shadow: -3px -2px inset #fcc471;
 }
 
-.buttonchild{
+#buttonrow{
+    padding-top: 5%;
+    width:100%;
+    display:inline-block;
     position: relative;
-    top:70%;
 }
 
-/*
-#easy,#med,#hard{
-    position: relative;
-    top: 50%;
-    font-size: 80px;
-    padding: 10px 50px;
-    border-radius: 40px;
-    background-color:#93dff7;
-    box-shadow: -3px -2px inset #349ab9;
-}*/
-
-#easy{right: 50%;}
-#hard{left: 50%;}
-
-#easy:hover,#easy:active,#med:hover,#med:active,#hard:hover,#hard:active{
-    font-weight: bold;
-    padding: 10px 47px;
-}
-.btn-lg:active{
-    position:relative;
-    top: 1px;
-    background-color:#70d2f0;
-    box-shadow: 3px 5px #349ab9;
-    opacity:100%;
-}
-#difficulty{
-    position: relative;
-    left: -70px;
-    top: 5px;
-    font-size: 30px;
-    font-family: "Poor Richard";
-    color:cadetblue;
-}
-form input[type=submit]:hover{
-    padding: 4px 28px;
-    font-weight: bold;
-    background-color: #fdc673;
-}
