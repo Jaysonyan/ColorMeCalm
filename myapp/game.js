@@ -1,9 +1,10 @@
 var currentSelection = 0;
 var counter = 0;
+var timeoutID = 0;
 
-let palette1=[["#d35400","#c0392b","#9b59b6","#2980b9","#1abc9c","#27ae60"],["#e67e22","#e74c3c","#8e44ad","#3498db","#16a085","#2ecc71"]];
-let palette2=[["#f08080","#f1c40f", "#ecf0f1","#95a5a6","#34495e","#1b2631"],["#e9967a", "#f39c12", "#bdc3c7","#7f8c8d","#2c3e50","#17202a"]];
-let palette=["#d35400","#c0392b","#9b59b6","#2980b9","#1abc9c","#27ae60","#e67e22","#e74c3c","#8e44ad","#3498db","#16a085","#2ecc71",
+const palette1=[["#d35400","#c0392b","#9b59b6","#2980b9","#1abc9c","#27ae60"],["#e67e22","#e74c3c","#8e44ad","#3498db","#16a085","#2ecc71"]];
+const palette2=[["#f08080","#f1c40f", "#ecf0f1","#95a5a6","#34495e","#1b2631"],["#e9967a", "#f39c12", "#bdc3c7","#7f8c8d","#2c3e50","#17202a"]];
+const palette=["#d35400","#c0392b","#9b59b6","#2980b9","#1abc9c","#27ae60","#e67e22","#e74c3c","#8e44ad","#3498db","#16a085","#2ecc71",
 "#f08080","#f1c40f", "#ecf0f1","#95a5a6","#34495e","#1b2631","#e9967a", "#f39c12", "#bdc3c7","#7f8c8d","#2c3e50","#17202a"];
 var grid = [];
 
@@ -35,17 +36,18 @@ function buildGrid(numSquares) {
 
   var gridSideLength = Math.floor(sideLength / numSquares);
   var gridColors = [];
-  var l = data[i*30];
-  for (var i = 0; i < numSquares; i++) {
+  
+  for (let i = 0; i < numSquares; i++) {
+    var l = data[i*30];
     // col of grid
     gridColors.push([]);
-    for (var j = 0; j < numSquares; j++) {
+    for (let j = 0; j < numSquares; j++) {
       var rgb = {r:0,g:0,b:0};
       var count = 0;
 
-      for (var y = 0; y < gridSideLength; y++) {
+      for (let y = 0; y < gridSideLength; y++) {
         // pixel col
-        for (var x = 0; x < gridSideLength; x++) {
+        for (let x = 0; x < gridSideLength; x++) {
           rgb.r += data[4 * ((j * gridSideLength) + (i * gridSideLength * sideLength) + (y * sideLength) + x)];
           rgb.g += data[4 * ((j * gridSideLength) + (i * gridSideLength * sideLength) + (y * sideLength) + x) + 1];
           rgb.b += data[4 * ((j * gridSideLength) + (i * gridSideLength * sideLength) + (y * sideLength) + x) + 2];
@@ -80,7 +82,7 @@ function buildGrid(numSquares) {
               };
             }
           }
-          grid[c].push({ x:0, y:0, n: min.index + 1, status: 1 });
+          grid[c].push({ x:0, y:0, n: min.index + 1, status: 0 });
       }
   }
 }
@@ -107,8 +109,8 @@ var myGameArea = {
         this.canvas.height = window.innerHeight;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-   //     this.canvas.setAttribute('id', "myCanvas");
-        this.canvas.addEventListener("click", mouseClick);
+        //     this.canvas.setAttribute('id', "myCanvas");
+         canvas.addEventListener("click", mouseClick);
     },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -121,6 +123,14 @@ function createCanvas() {
   document.body.insertBefore(canvas, document.body.childNodes[0]);
   canvas.setAttribute('id', "myCanvas");
   canvas.addEventListener("click", mouseClick);
+  canvas.addEventListener("mousedown", function(){
+      canvas.addEventListener("mousemove", mouseClick, true)
+  });
+
+  canvas.addEventListener("mouseup", function(){
+      canvas.removeEventListener("mousemove", mouseClick, true)
+  });
+  
   $.ajaxSetup({
       async: false
   });
@@ -229,12 +239,15 @@ function drawGrid(arr, finished) {
     let myGameArea = document.getElementById("myCanvas");
     let context = myGameArea.getContext("2d");
     let r=0;
-    var halfWidth=myGameArea.width / 2;
-    var halfHeight=myGameArea.height / 2;
-    var squareLen=myGameArea.height/arr.length;
-    if (finished){
+    const halfWidth=myGameArea.width / 2;
+    const halfHeight=myGameArea.height / 2;
+    const squareLen=myGameArea.height/arr.length;
+
+    if (finished ){
         var centre=[myGameArea.width/4,halfHeight];
-    } else { var centre = [halfWidth, halfHeight];}
+    } else { 
+        var centre = [halfWidth, halfHeight];
+    }
 
     let fontSize = "20px";
     for (let row of arr) {
@@ -298,6 +311,7 @@ function drawGrid(arr, finished) {
 // }
 
 function mouseClick(e) {
+    console.log('hello');
     let canvas = document.getElementById('myCanvas');
     let squareLen = canvas.height / grid.length;
     let x = e.layerX;
@@ -339,7 +353,7 @@ function checkFinished() {
   let canvas = document.getElementById('myCanvas');
   let context = canvas.getContext("2d");
 
-  if (counter == grid.length*grid.length || true) {
+  if (counter == grid.length*grid.length) {
     context.clearRect(0, 0, canvas.width, canvas.height);
     drawGrid(grid, true);
     // context.beginPath();
@@ -363,12 +377,22 @@ function updateGameArea() {
     drawPalette(palette1,[0,0]);
     drawPalette(palette2,[canvas.width - (2 * (canvas.height / palette2[0].length)),0]);
 }
-*/
 
 
-//setInterval(updateGameArea, 500);
+if (mouseDown){
+    onmousemove = function(e){mouseClick(e)};
+}
+
 
 // document.addEventListener("DOMContentLoaded", function(e) {
 //   startGame();
 // });
 //document.getElementById("myCanvas").addEventListener("click", mouseClick);
+
+/*
+$('canvas').on('mousedown', function(e) {
+    timeoutId = setTimeout(mouseClick(e), 100);
+}).on('mouseup mouseleave', function() {
+    clearTimeout(timeoutId);
+});
+*/
