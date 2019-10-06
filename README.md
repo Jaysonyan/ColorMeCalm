@@ -14,4 +14,4 @@ Initially created for the Waterloo Game Jam September 2018. Game Jam is a hackat
 - Node.js
 
 ## Acknowledgments 
-Made in collaboration with Stephen Hwang, Jayson Yan, Bensons Su, and Joshua Du.
+Made in collaboration with Stephen Hwang, Jayson Yan, Benson Su, and Joshua Du.
